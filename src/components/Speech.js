@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import micon from "../static/micon.svg";
 import micoff from "../static/micoff.svg";
 import { actionsTypes, dispatchAction } from "../actions/actions";
@@ -15,7 +15,8 @@ class Speech extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listening: false
+      listening: false,
+      transcript: ""
     };
     this.initSpeech();
     this.startListening = this.startListening.bind(this);
@@ -44,17 +45,23 @@ class Speech extends Component {
     this.speech.onresult = event => {
       const transcript = [...event.results].pop()[0].transcript;
       // console.log(transcript);
-      dispatchAction(actionsTypes.SPEECH_INPUT_ADD, transcript);
+      this.setState({ transcript });
     };
     this.speech.continuous = true;
-    this.speech.interimResults = false;
+    this.speech.interimResults = true;
     this.speech.lang = "en-US";
   };
 
   stopListening = () => {
     this.speech.stop();
     this.speech.abort();
-    this.setState({ listening: false });
+    this.setState({ listening: false, transcript: "" });
+    dispatchAction(actionsTypes.SPEECH_INPUT_ADD, this.state.transcript);
+  };
+  abort = () => {
+    this.speech.stop();
+    this.speech.abort();
+    this.setState({ listening: false, transcript: "" });
   };
 
   startListening = () => {
@@ -73,12 +80,22 @@ class Speech extends Component {
       ? this.stopListening
       : this.startListening;
     return (
-      <div
-        className={`voiceinput ${listening ? "listening" : ""}`}
-        onClick={clickHandler}
-      >
-        <img alt="voice input" src={icon} />
-      </div>
+      <Fragment>
+        {listening && (
+          <div className="button-cancel" onClick={this.abort}>
+            X
+          </div>
+        )}
+        <div className="vouce-output">
+          <div>{this.state.transcript}</div>
+        </div>
+        <div
+          className={`voiceinput ${listening ? "listening" : ""}`}
+          onClick={clickHandler}
+        >
+          <img alt="voice input" src={icon} />
+        </div>
+      </Fragment>
     );
   }
 }

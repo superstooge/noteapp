@@ -1,4 +1,4 @@
-@import '../vars.scss';
+@import "../vars.scss";
 
 .voiceinput {
   background-color: $grey;
@@ -11,6 +11,27 @@
   position: absolute;
   bottom: 10px;
   right: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+  img {
+    width: 30px;
+  }
+}
+
+.button-cancel {
+  background-color: $white;
+  border: 2px solid $red;
+  color: $red;
+  font-weight: 900;
+  width: 36px;
+  display: flex;
+  border-radius: 50%;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 110px;
   cursor: pointer;
   transition: background-color 0.3s linear;
   img {
@@ -31,5 +52,22 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+.vouce-output {
+  display: flex;
+  position: absolute;
+  right: 165px;
+  bottom: 21px;
+  width: 70vw;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  font-size: 14px;
+  @media screen and (max-width: $break-small) {
+    right: 12px;
+    bottom: 65px;
+    font-size: 12px;
+    width: 53vw;
   }
 }
