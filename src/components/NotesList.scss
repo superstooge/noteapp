@@ -1,4 +1,4 @@
-@import '../vars.scss';
+@import "../vars.scss";
 .notes-list {
   min-width: 15vw;
   border-right: $border;
@@ -8,6 +8,7 @@
 }
 .no-notes {
   padding: 10px;
+  margin: 13px 0 0 8px;
 }
 .notes-search {
   height: 40px;
