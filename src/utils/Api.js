@@ -4,11 +4,11 @@ import {
   saveNoteSuccededAction
 } from "../actions/actions";
 import { createNotification } from "./notifications";
+import config from "../appconfig.json";
 
 const username = "admin";
 const password = "1234";
 const credentials = window.btoa(username + ":" + password);
-import config from "../appconfig.json";
 
 export default {
   saveNote: async noteObj => {

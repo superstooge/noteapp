@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import NoteButton from './NoteButton';
-import { connect } from 'react-redux';
-import { actionsTypes, dispatchAction } from '../actions/actions';
-import PropTypes from 'prop-types';
-import './NotesList.scss';
+import React, { Component } from "react";
+import NoteButton from "./NoteButton";
+import { connect } from "react-redux";
+import { actionsTypes, dispatchAction } from "../actions/actions";
+import PropTypes from "prop-types";
+import "./NotesList.scss";
+import filter from "../static/filter.svg";
 class NotesList extends Component {
   constructor() {
     super();
     this.state = {
-      query: ''
+      query: ""
     };
     this.filterNotes = evt => {
       const { value: query } = evt.currentTarget;
@@ -40,9 +41,10 @@ class NotesList extends Component {
       <div className="notes-list">
         {notes.length > 0 && (
           <div className="notes-search">
+            <img src={filter} />
             <input
               type="text"
-              placeholder="search notes"
+              placeholder="filter notes"
               value={this.state.query}
               onChange={this.filterNotes}
             />
