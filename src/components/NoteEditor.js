@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import saveIcon from '../static/save.svg';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import saveIcon from "../static/save.svg";
+import { connect } from "react-redux";
 import {
   Editor,
   EditorState,
@@ -9,22 +9,22 @@ import {
   getDefaultKeyBinding,
   convertToRaw,
   Modifier
-} from 'draft-js';
+} from "draft-js";
 import {
   InlineStyleControls,
   BlockStyleControls,
   getBlockStyle,
   styleMap
-} from './StylesControl';
-import { actionsTypes, dispatchAction } from '../actions/actions';
-import PropTypes from 'prop-types';
-import './NoteEditor.scss';
+} from "./StylesControl";
+import { actionsTypes, dispatchAction } from "../actions/actions";
+import PropTypes from "prop-types";
+import "./NoteEditor.scss";
 
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      title: "",
       id: null,
       editorState: EditorState.createEmpty()
     };
@@ -34,7 +34,7 @@ class NoteEditor extends Component {
     };
     this.onClickSave = () => {
       const { editorState, title } = this.state;
-      if (this.isUpdated() && title !== '') {
+      if (this.isUpdated() && title !== "") {
         const { id } = this.props.currentNote;
         dispatchAction(actionsTypes.SAVE_NOTE, {
           id,
@@ -50,7 +50,7 @@ class NoteEditor extends Component {
           convertToRaw(this.state.editorState.getCurrentContent())
         ) !== note ||
           title !== this.state.title) &&
-        this.state.title !== ''
+        this.state.title !== ""
       );
     };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
@@ -73,10 +73,10 @@ class NoteEditor extends Component {
     }
     if (!id && id !== state.id) {
       newState.editorState = EditorState.createEmpty();
-      newState.title = '';
+      newState.title = "";
     }
-    if (voiceInput !== '') {
-      console.log('adding new text from voice', voiceInput);
+    if (voiceInput !== "") {
+      console.log("adding new text from voice", voiceInput);
       const newContent = Modifier.insertText(
         state.editorState.getCurrentContent(),
         state.editorState.getSelection(),
@@ -86,7 +86,7 @@ class NoteEditor extends Component {
       const editorState = EditorState.push(
         state.editorState,
         newContent,
-        'insert-fragment'
+        "insert-fragment"
       );
       newState.editorState = editorState;
     }
@@ -95,7 +95,7 @@ class NoteEditor extends Component {
   }
   componentDidUpdate() {
     const { voiceInput } = this.props;
-    if (voiceInput !== '') {
+    if (voiceInput !== "") {
       dispatchAction(actionsTypes.SPEECH_INPUT_CLEAR);
     }
   }
@@ -138,16 +138,16 @@ class NoteEditor extends Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    let className = 'RichEditor-editor';
+    let className = "RichEditor-editor";
     var contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
       if (
         contentState
           .getBlockMap()
           .first()
-          .getType() !== 'unstyled'
+          .getType() !== "unstyled"
       ) {
-        className += ' RichEditor-hidePlaceholder';
+        className += " RichEditor-hidePlaceholder";
       }
     }
     return (
@@ -177,7 +177,7 @@ class NoteEditor extends Component {
               handleKeyCommand={this.handleKeyCommand}
               keyBindingFn={this.mapKeyToEditorCommand}
               onChange={this.onChange}
-              placeholder="Create new note..."
+              placeholder="Wrrite a note..."
               ref="editor"
               spellCheck={true}
             />
@@ -185,7 +185,7 @@ class NoteEditor extends Component {
         </div>
         <div
           className={`save-button ${
-            this.isUpdated() && title !== '' ? '' : 'button-disabled'
+            this.isUpdated() && title !== "" ? "" : "button-disabled"
           }`}
           onClick={this.onClickSave}
         >
