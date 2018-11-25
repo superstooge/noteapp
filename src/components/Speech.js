@@ -34,7 +34,7 @@ class Speech extends Component {
       //   console.log("on speech start");
       this.props.onspeechstart();
     };
-    this.speech.onspeechend = () => {
+    this.speech.onspeechend = this.speech.onaudioend = () => {
       //   console.log("on speech end");
       this.stopListening();
     };
@@ -43,9 +43,11 @@ class Speech extends Component {
       this.stopListening();
     };
     this.speech.onresult = event => {
-      const transcript = [...event.results].pop()[0].transcript;
-      // console.log(transcript);
-      this.setState({ transcript });
+      if (this.state.listening) {
+        const transcript = [...event.results].pop()[0].transcript;
+        // console.log(transcript);
+        this.setState({ transcript });
+      }
     };
     this.speech.continuous = true;
     this.speech.interimResults = true;

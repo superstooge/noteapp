@@ -76,10 +76,17 @@ class NoteEditor extends Component {
       newState.title = "";
     }
     if (voiceInput !== "") {
-      console.log("adding new text from voice", voiceInput);
-      const newContent = Modifier.insertText(
+      // console.log("adding new text from voice", voiceInput);
+      const selection = state.editorState.getSelection();
+      let textAction;
+      if (selection.isCollapsed()) {
+        textAction = Modifier.insertText;
+      } else {
+        textAction = Modifier.replaceText;
+      }
+      const newContent = textAction(
         state.editorState.getCurrentContent(),
-        state.editorState.getSelection(),
+        selection,
         voiceInput
       );
 
