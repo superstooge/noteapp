@@ -1,0 +1,4 @@
+{
+  "speechRecognitionLang": "en-US",
+  "apiBaseUrl": "http://localhost:8080/notes"
+}

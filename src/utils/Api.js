@@ -2,43 +2,43 @@ import {
   dispatchAction,
   actionsTypes,
   saveNoteSuccededAction
-} from '../actions/actions';
-import { createNotification } from './notifications';
+} from "../actions/actions";
+import { createNotification } from "./notifications";
 
-const username = 'admin';
-const password = '1234';
-const credentials = window.btoa(username + ':' + password);
-const baseUrl = `http://localhost:8080/notes`;
+const username = "admin";
+const password = "1234";
+const credentials = window.btoa(username + ":" + password);
+import config from "../appconfig.json";
 
 export default {
   saveNote: async noteObj => {
     const { id } = noteObj;
     try {
-      let result = await fetch(`${baseUrl}${id ? `/${id}` : ''}`, {
-        method: 'POST',
+      let result = await fetch(`${config.apiBaseUrl}${id ? `/${id}` : ""}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          "Content-Type": "application/json; charset=utf-8",
           Authorization: `Basic  ${credentials}`
         },
         body: JSON.stringify(noteObj)
       });
       let res = await result.json();
 
-      result = await fetch(baseUrl, {
+      result = await fetch(config.apiBaseUrl, {
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          "Content-Type": "application/json; charset=utf-8",
           Authorization: `Basic  ${credentials}`
         }
       });
       let list = await result.json();
 
-      if (res.message === 'Success') {
-        createNotification('success', `Note '${noteObj.title}' saved!`);
+      if (res.message === "Success") {
+        createNotification("success", `Note '${noteObj.title}' saved!`);
         saveNoteSuccededAction(list.data, id);
       }
     } catch (error) {
       createNotification(
-        'error',
+        "error",
         `Note '${noteObj.title}' was not saved
       ${error.message}`
       );
@@ -47,21 +47,21 @@ export default {
   },
   loadNote: async id => {
     try {
-      let result = await fetch(`${baseUrl}/${id}`, {
+      let result = await fetch(`${config.apiBaseUrl}/${id}`, {
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          "Content-Type": "application/json; charset=utf-8",
           Authorization: `Basic  ${credentials}`
         }
       });
       let res = await result.json();
-      if (res.message === 'Success') {
+      if (res.message === "Success") {
         dispatchAction(actionsTypes.LOAD_NOTE_SUCCEEDED, res.data);
       } else {
         dispatchAction(actionsTypes.LOAD_NOTE_FAILED);
       }
     } catch (error) {
       createNotification(
-        'error',
+        "error",
         `Could not load note
       ${error.message}`
       );
@@ -70,22 +70,22 @@ export default {
   },
   getNotes: async () => {
     try {
-      let result = await fetch(baseUrl, {
+      let result = await fetch(config.apiBaseUrl, {
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          "Content-Type": "application/json; charset=utf-8",
           Authorization: `Basic  ${credentials}`
         }
       });
       let res = await result.json();
-      if (res.message === 'Success') {
+      if (res.message === "Success") {
         dispatchAction(actionsTypes.LIST_NOTES_SUCCEEDED, res.data);
       } else {
-        createNotification('error', `Could not load notes list:`);
+        createNotification("error", `Could not load notes list:`);
         dispatchAction(actionsTypes.LIST_NOTES_FAILED, res.data);
       }
     } catch (error) {
       createNotification(
-        'error',
+        "error",
         `Could not load notes list
       ${error.message}`
       );

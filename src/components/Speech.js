@@ -3,7 +3,7 @@ import micon from "../static/micon.svg";
 import micoff from "../static/micoff.svg";
 import { actionsTypes, dispatchAction } from "../actions/actions";
 import "./Speech.scss";
-
+import config from "../appconfig.json";
 const noop = () => {};
 class Speech extends Component {
   static defaultProps = {
@@ -49,7 +49,7 @@ class Speech extends Component {
     };
     this.speech.continuous = true;
     this.speech.interimResults = true;
-    this.speech.lang = "en-US";
+    this.speech.lang = config.speechRecognitionLang;
   };
 
   stopListening = () => {
