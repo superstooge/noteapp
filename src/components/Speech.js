@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import micon from '../static/micon.svg';
-import micoff from '../static/micoff.svg';
-import { actionsTypes, dispatchAction } from '../actions/actions';
-import './Speech.scss';
+import React, { Component } from "react";
+import micon from "../static/micon.svg";
+import micoff from "../static/micoff.svg";
+import { actionsTypes, dispatchAction } from "../actions/actions";
+import "./Speech.scss";
 
 const noop = () => {};
-
 class Speech extends Component {
   static defaultProps = {
     onresult: noop,
@@ -49,7 +48,7 @@ class Speech extends Component {
     };
     this.speech.continuous = true;
     this.speech.interimResults = false;
-    this.speech.lang = 'en-US';
+    this.speech.lang = "en-US";
   };
 
   stopListening = () => {
@@ -75,7 +74,7 @@ class Speech extends Component {
       : this.startListening;
     return (
       <div
-        className={`voiceinput ${listening ? 'listening' : ''}`}
+        className={`voiceinput ${listening ? "listening" : ""}`}
         onClick={clickHandler}
       >
         <img alt="voice input" src={icon} />
