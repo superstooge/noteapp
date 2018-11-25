@@ -41,7 +41,7 @@ class NotesList extends Component {
       <div className="notes-list">
         {notes.length > 0 && (
           <div className="notes-search">
-            <img src={filter} />
+            <img alt="filter notes" src={filter} />
             <input
               type="text"
               placeholder="filter notes"
