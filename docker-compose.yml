@@ -1,0 +1,10 @@
+version: "3"
+services:
+  note-app:
+    build: ./
+    ports:
+      - "3004:3004"
+  note-service:
+    image: berkay/note-service
+    ports:
+      - 8080:8080

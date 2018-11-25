@@ -1,0 +1,64 @@
+@import './vars.scss';
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 35px;
+  position: relative;
+  padding: 10px;
+  border-bottom: $border;
+  box-shadow: $boxshadow;
+  @media screen and (max-width: $break-small) {
+    height: 10px;
+  }
+}
+
+.app-logo {
+  height: 35px;
+  @media screen and (max-width: $break-small) {
+    height: 20px;
+  }
+  margin-right: 5px;
+}
+
+.app-title {
+  font-weight: 900;
+}
+
+.home {
+  display: flex;
+  height: 90vh;
+}
+
+.button-create {
+  cursor: pointer;
+  color: $blue;
+  border-color: $blue;
+  padding: 5px;
+  border-radius: 7px;
+  border: 2px solid $blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  height: 70%;
+  span img {
+    width: 10px;
+    margin-right: 5px;
+    &:hover {
+      fill: $blue;
+      fill: #fff;
+    }
+  }
+  &:hover {
+    color: #fff;
+    background-color: $blue;
+  }
+}

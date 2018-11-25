@@ -1,0 +1,31 @@
+@import '../vars.scss';
+
+.button-note {
+  height: 40px;
+  border-bottom: $border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0 10px;
+  -webkit-transition: box-shadow 0.4s linear;
+  transition: box-shadow 0.4s linear;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  font-size: 14px;
+  border-left: 4px solid #fff;
+  @media screen and (max-width: $break-small) {
+    font-size: 8px;
+    padding: 0px 5px 0 5px;
+    height: 25px;
+  }
+  span img {
+    width: 10px;
+  }
+  &:hover {
+    box-shadow: $boxshadow;
+  }
+}
+
+.button-note-selected {
+  border-left: 4px solid $blue;
+}

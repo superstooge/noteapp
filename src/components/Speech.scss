@@ -1,0 +1,35 @@
+@import '../vars.scss';
+
+.voiceinput {
+  background-color: $grey;
+  width: 40px;
+  display: flex;
+  border-radius: 50%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+  img {
+    width: 30px;
+  }
+}
+
+.listening {
+  animation: pulse 1s infinite;
+  background-color: $red;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  59% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
