@@ -20,7 +20,7 @@ class App extends Component {
           <span className="app-title">Note app</span>
           <div className="button-create" onClick={this.createNewNoteAction}>
             <span>
-              <img src={plus} alt="create new note" />
+              <img src={plus} alt="create a new note" />
             </span>
             create
           </div>
