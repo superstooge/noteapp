@@ -20,7 +20,6 @@ beforeEach(() => {
 });
 it("renders without crashing", () => {
   shallow(<NoteEditor store={store} />);
-  shallow(<NoteEditor store={store} />);
 });
 it("renders title correctly", () => {
   const component = mount(<NoteEditor store={store} />);
